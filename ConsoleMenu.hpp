@@ -9,15 +9,14 @@
 
 namespace Menu
 {
-
+	// Abstract base menu class, all menus should derive from this, and an associated ConsoleMenuResult should be defined. 
 	class ConsoleMenu
 	{
 	public:
 
 		///	Functions ///
 
-		// This contains the menu program loop
-		// TODO1: Consider return type, is any data needed to be returned, such as a polymorphic Results object?
+		// This contains the associated menu program loop
 		virtual std::shared_ptr<Data::ConsoleMenuResults> run() = 0;
 	};
 
@@ -82,7 +81,7 @@ namespace Menu
 
 		///	Functions ///
 
-		// This contains the main program loop and controls the upper menu level
+		// This contains the main program loop and controls the database entry creation menu
 		std::shared_ptr<Data::ConsoleMenuResults> run() final;
 	};
 
@@ -114,7 +113,7 @@ namespace Menu
 
 		///	Functions ///
 
-		// This contains the main program loop and controls the upper menu level
+		// This contains the main program loop and controls the database entry read menu
 		std::shared_ptr<Data::ConsoleMenuResults> run() final;
 
 	private:
@@ -149,7 +148,7 @@ namespace Menu
 
 		///	Functions ///
 
-		// This contains the main program loop and controls the upper menu level
+		// This contains the main program loop and controls the database entry update menu
 		std::shared_ptr<Data::ConsoleMenuResults> run() final;
 	};
 
@@ -181,7 +180,7 @@ namespace Menu
 
 		///	Functions ///
 
-		// This contains the main program loop and controls the upper menu level
+		// This contains the main program loop and controls the database entry deletion menu
 		std::shared_ptr<Data::ConsoleMenuResults> run() final;
 	};	
 
@@ -213,7 +212,7 @@ namespace Menu
 
 		///	Functions ///
 
-		// This contains the main program loop and controls the upper menu level
+		// This contains the main program loop and controls the database optional entry data gathering menu
 		std::shared_ptr<Data::ConsoleMenuResults> run() final;
 
 	private:
@@ -249,7 +248,7 @@ namespace Menu
 
 		///	Functions ///
 
-		// This contains the main program loop and controls the upper menu level
+		// This contains the main program loop and controls the mandatory entry data gathering menu
 		std::shared_ptr<Data::ConsoleMenuResults> run() final;
 
 	};
@@ -282,7 +281,7 @@ namespace Menu
 
 		///	Functions ///
 
-		// This contains the main program loop and controls the upper menu level
+		// This contains the main program loop and controls the database entry read menu
 		std::shared_ptr<Data::ConsoleMenuResults> run() final;
 
 	};
@@ -315,7 +314,7 @@ namespace Menu
 
 		///	Functions ///
 
-		// This contains the main program loop and controls the upper menu level
+		// This contains the main program loop and controls the database read settings menu
 		std::shared_ptr<Data::ConsoleMenuResults> run() final;
 	};
 }

@@ -6,7 +6,7 @@ namespace Menu
 {
 	namespace Data
 	{
-		// TODO1: Can these be configured such that a ConsoleMenuResults can be returned for each menu call, which can then be used to make decisions on return?
+		// A set of polymorphic returns used to retrieve information from lower menus to higher menus. 
 		struct ConsoleMenuResults
 		{
 		public:

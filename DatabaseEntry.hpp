@@ -5,19 +5,29 @@ namespace Database
 {
 	namespace Data
 	{
+		// A data struct containing fields which must exist in the database.
 		struct DatabaseEntryMandatoryFields
 		{
 			DatabaseEntryMandatoryFields(std::string aFirstName, std::string aLastName)
 				: first_name(aFirstName), last_name(aLastName)
 			{
+				if(aFirstName.empty() || aLastName.empty())
+				{
+					throw std::exception("Mandatory fields cannot be blank");
+				}
 			};
 
 			DatabaseEntryMandatoryFields(const Menu::Data::AddressBookMandatoryMenuResults& aAddressBookMandatoryMenuResults)
 				: first_name(aAddressBookMandatoryMenuResults.first_name),
 				last_name(aAddressBookMandatoryMenuResults.last_name)
 			{
+				if(aAddressBookMandatoryMenuResults.first_name.empty() || aAddressBookMandatoryMenuResults.last_name.empty())
+				{
+					throw std::exception("Mandatory fields cannot be blank");
+				}
 			};
 
+			// For human readable printing purposes
 			std::string get_string() const
 			{
 				std::string aReturn;
@@ -31,6 +41,7 @@ namespace Database
 			std::string last_name;
 		};
 
+		// A data struct containing fields which may exist in the database.
 		struct DatabaseEntryOptionalFields
 		{
 			DatabaseEntryOptionalFields() = default;
@@ -48,6 +59,7 @@ namespace Database
 			{
 			};
 
+			// For human readable printing purposes
 			std::string get_string() const
 			{
 				std::string aReturn;
@@ -63,7 +75,7 @@ namespace Database
 			std::string email;
 		};
 		
-		// This describes the data which should be stored in the database.
+		// This describes the data which can be stored in the database, containing mandatory and optional fields. 
 		struct DatabaseEntry
 		{
 			// First name and last name are mandatory, but phone number is optional
@@ -74,6 +86,7 @@ namespace Database
 			{
 			};
 
+			// For human readable printing purposes
 			std::string get_string() const
 			{
 				std::string aReturn;

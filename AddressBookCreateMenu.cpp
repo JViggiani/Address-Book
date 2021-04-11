@@ -55,8 +55,6 @@ namespace Menu
 				else if(option == 2)
 				{
 					//Build and run mandatory menu
-
-					//Causes null ptr
 					Menu::AddressBookMandatoryMenu aMandatoryMenu;
 					std::shared_ptr<Menu::Data::AddressBookMandatoryMenuResults> aMandatoryResults =
 						std::dynamic_pointer_cast<Menu::Data::AddressBookMandatoryMenuResults>(aMandatoryMenu.run());
