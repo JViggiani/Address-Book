@@ -72,6 +72,9 @@
     <ClCompile Include="AddressBookDeleteMenu.cpp">
       <Filter>Source Files\Menu</Filter>
     </ClCompile>
+    <ClCompile Include="AddressBookChangeReadSettingsMenu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -5,13 +5,15 @@
 
 #include <boost/log/trivial.hpp>
 
+
 namespace Database
 {
 
     Database* Database::_pinstance{nullptr};
     std::mutex Database::_mutex;
     std::map<unsigned int, Data::DatabaseEntry> Database::_database;
-    std::queue<unsigned int> Database::_database_available_keys;
+    std::stack<unsigned int> Database::_database_available_keys;
+    eSortMode Database::_sortMode = eSortMode::Unsorted;
 
     Database* Database::GetInstance()
     {
@@ -40,16 +42,98 @@ namespace Database
         std::cout << "Inserted entry into DB." << "\n";
     }
 
+    eSortMode Database::get_sort_mode()
+    {
+        return _sortMode;
+    }
+    void Database::set_sort_mode(eSortMode aSortMode)
+    {
+        std::cout << "Changed sort mode: " << std::to_string(static_cast<typename std::underlying_type<eSortMode>::type>(aSortMode)) << "\n";
+        
+        _sortMode = aSortMode;
+    }
+
     void Database::search_entries(const std::regex& aRegex)
     {
-        for(auto iter = _database.begin(); iter != _database.end(); iter++)
+        if(Database::GetInstance()->get_sort_mode() == eSortMode::Unsorted)
         {
-            if(std::regex_search(iter->second._mandatoryFields.first_name, aRegex)
-                   || std::regex_search(iter->second._mandatoryFields.last_name, aRegex))
+            for(auto iter = _database.begin(); iter != _database.end(); iter++)
             {
-                std::cout << "ENTRY KEY: " << std::to_string(iter->first) << "\n";
-                std::cout << "ENTRY VALUE: " << iter->second.get_string() << "\n";
+                if(std::regex_search(iter->second._mandatoryFields.first_name, aRegex)
+                   || std::regex_search(iter->second._mandatoryFields.last_name, aRegex))
+                {
+                    std::cout << "ENTRY KEY: " << std::to_string(iter->first) << "\n";
+                    std::cout << "ENTRY VALUE: " << iter->second.get_string() << "\n";
+                }
             }
+        }
+        else if(Database::GetInstance()->get_sort_mode() == eSortMode::FirstName)
+        {
+            //Keys and values are reversed here to remain in the desired order
+            std::multimap<Data::DatabaseEntry, unsigned int, CompareByFirstName> aSearchMap;
+
+            for(auto iter = _database.begin(); iter != _database.end(); iter++)
+            {
+                if(std::regex_search(iter->second._mandatoryFields.first_name, aRegex)
+                   || std::regex_search(iter->second._mandatoryFields.last_name, aRegex))
+                {
+
+
+                    aSearchMap.insert(std::pair<Data::DatabaseEntry, unsigned int>(iter->second, iter->first));
+                }
+            }
+
+            for(auto& element : aSearchMap)
+            {                
+                std::cout << "ENTRY KEY: " << std::to_string(element.second) << "\n";
+                std::cout << "ENTRY VALUE: " << element.first.get_string() << "\n";
+            }
+        }
+        else if(Database::GetInstance()->get_sort_mode() == eSortMode::LastName)
+        {
+            //Keys and values are reversed here to remain in the desired order
+            std::multimap<Data::DatabaseEntry, unsigned int, CompareByLastName> aSearchMap;
+
+            for(auto iter = _database.begin(); iter != _database.end(); iter++)
+            {
+                if(std::regex_search(iter->second._mandatoryFields.first_name, aRegex)
+                   || std::regex_search(iter->second._mandatoryFields.last_name, aRegex))
+                {
+                    //std::cout << "ENTRY KEY: " << std::to_string(iter->first) << "\n";
+                    //std::cout << "ENTRY VALUE: " << iter->second.get_string() << "\n";
+
+                    aSearchMap.insert(std::pair<Data::DatabaseEntry, unsigned int>(iter->second, iter->first));
+                }
+            }
+
+            for(auto& element : aSearchMap)
+            {
+                std::cout << "ENTRY KEY: " << std::to_string(element.second) << "\n";
+                std::cout << "ENTRY VALUE: " << element.first.get_string() << "\n";
+            }
+        }
+        else
+        {
+            throw std::exception("Unknown setting on how to sort retrieval output");
+        }
+    }
+
+    void Database::delete_entry(unsigned int key)
+    {
+        auto aMapIt = _database.find(key);
+
+        if(aMapIt != _database.end())
+        {
+            std::cout << "Deleting key: " << std::to_string(key) << "\n";
+            std::cout << "Deleting entry: " << aMapIt->second.get_string() << "\n";
+
+            _database.erase(key);
+
+            _database_available_keys.push(key);
+        }
+        else
+        {
+            std::cout << "Could not find key to delete." << "\n";
         }
     }
 
@@ -58,7 +142,7 @@ namespace Database
         delete _pinstance;
     }
 
-    int Database::determine_key_for_new_entry()
+    unsigned int Database::determine_key_for_new_entry()
     {
         if(_database.empty())
             return 0;
@@ -68,12 +152,12 @@ namespace Database
         }
         else
         {
-            int aReturn = _database_available_keys.front();
+            unsigned int aReturn = _database_available_keys.top();
             _database_available_keys.pop();
             return aReturn;
         }
     }
-    int Database::determine_largest_key_currently_in_database()
+    unsigned int Database::determine_largest_key_currently_in_database()
     {
         return _database.rbegin()->first;
     }

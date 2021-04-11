@@ -1,5 +1,4 @@
 #include "ConsoleMenu.hpp"
-
 #include "Database.hpp"
 
 #include <boost/log/core.hpp>
@@ -11,39 +10,37 @@
 namespace Menu
 {
 
-	std::shared_ptr<Menu::Data::ConsoleMenuResults> Menu::AddressBookDeleteMenu::run()
+	std::shared_ptr<Menu::Data::ConsoleMenuResults> Menu::AddressBookChangeReadSettingsMenu::run()
 	{
 		auto aResults
-			= std::make_shared<Data::AddressBookDeleteMenuResults>();
+			= std::make_shared<Data::AddressBookChangeReadSettingsMenuResults>();
 
 		try
 		{
-			BOOST_LOG_TRIVIAL(debug) << "Opening delete menu.";
+			BOOST_LOG_TRIVIAL(debug) << "Opening create menu.";
 
 			bool end = false;
 
 			do
 			{
-				std::cout << "========================" << "\n";
-				std::cout << "==    Delete Entry    ==" << "\n";
-				std::cout << "Are you sure you want to delete a key? You must know the key to delete beforehand, which can be found with the Read Entry menu." << "\n";
-				std::cout << "1. Yes" << "\n";
-				std::cout << "2. No, exit" << "\n";
-				std::cout << "========================" << "\n";
+				std::cout << "===============================" << "\n";
+				std::cout << "==    Change Display mode    ==" << "\n";
+				std::cout << "1. Unsorted" << "\n";
+				std::cout << "2. By first name" << "\n";
+				std::cout << "3. By last name" << "\n";
+				std::cout << "4. Exit" << "\n";
+				std::cout << "===============================" << "\n";
 
 				int option;
 				std::cin >> option;
 
-				if(option == 1)
-				{
-					std::cout << "Enter key to delete" << "\n";
-					
-					unsigned int key;
-					std::cin >> key;
+				Database::Data::DatabaseEntryOptionalFields aOptionalFields;
 
-					Database::Database::GetInstance()->delete_entry(key);
+				if(option >= 1 && option <= 3)
+				{
+					Database::Database::GetInstance()->set_sort_mode(static_cast<Database::eSortMode>(option));
 				}
-				else if(option == 2)
+				else if(option == 4)
 				{
 					end = true;
 				}

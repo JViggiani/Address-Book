@@ -18,7 +18,7 @@ namespace Database
 			{
 			};
 
-			std::string get_string()
+			std::string get_string() const
 			{
 				std::string aReturn;
 				aReturn.append("First name: " + first_name + "\n");
@@ -48,7 +48,7 @@ namespace Database
 			{
 			};
 
-			std::string get_string()
+			std::string get_string() const
 			{
 				std::string aReturn;
 				if(!phone_number.empty())
@@ -74,7 +74,7 @@ namespace Database
 			{
 			};
 
-			std::string get_string()
+			std::string get_string() const
 			{
 				std::string aReturn;
 

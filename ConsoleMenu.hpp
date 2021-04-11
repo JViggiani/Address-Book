@@ -116,6 +116,9 @@ namespace Menu
 
 		// This contains the main program loop and controls the upper menu level
 		std::shared_ptr<Data::ConsoleMenuResults> run() final;
+
+	private:
+		void print_settings();
 	};
 
 	class AddressBookUpdateMenu : public Menu::ConsoleMenu
@@ -284,5 +287,35 @@ namespace Menu
 
 	};
 
-	
+	class AddressBookChangeReadSettingsMenu : public Menu::ConsoleMenu
+	{
+	public:
+
+		///	Constructors and Destructors ///
+
+		//! Main constructor.
+		AddressBookChangeReadSettingsMenu() = default;
+
+		//! Default destructor.
+		~AddressBookChangeReadSettingsMenu() = default;
+
+		//! Default copy constructor
+		AddressBookChangeReadSettingsMenu(const AddressBookChangeReadSettingsMenu&) = default;
+
+		//! Default move constructor
+		AddressBookChangeReadSettingsMenu(AddressBookChangeReadSettingsMenu&&) = default;
+
+		///	Operators ///
+
+		//! Default copy assignment
+		AddressBookChangeReadSettingsMenu& operator=(const AddressBookChangeReadSettingsMenu&) = default;
+
+		//! Default move assignment
+		AddressBookChangeReadSettingsMenu& operator=(AddressBookChangeReadSettingsMenu&&) = default;
+
+		///	Functions ///
+
+		// This contains the main program loop and controls the upper menu level
+		std::shared_ptr<Data::ConsoleMenuResults> run() final;
+	};
 }

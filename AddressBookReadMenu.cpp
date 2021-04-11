@@ -1,4 +1,5 @@
 #include "ConsoleMenu.hpp"
+#include "Database.hpp"
 
 #include <boost/log/core.hpp>
 #include <boost/log/trivial.hpp>
@@ -8,6 +9,26 @@
 
 namespace Menu
 {
+
+	void Menu::AddressBookReadMenu::print_settings()
+	{
+		std::cout << "Sort mode: ";
+		switch(Database::Database::GetInstance()->get_sort_mode())
+		{
+		case Database::eSortMode::Unsorted:
+			std::cout << "Unsorted" << "\n";
+			break;
+		case Database::eSortMode::FirstName:
+			std::cout << "Firstname" << "\n";
+			break;
+		case Database::eSortMode::LastName:
+			std::cout << "Lastname" << "\n";
+			break;
+		default:
+			throw std::exception("Unknown sort mode when retrieving settings.");
+			break;
+		}
+	}
 
 	std::shared_ptr<Menu::Data::ConsoleMenuResults> Menu::AddressBookReadMenu::run()
 	{
@@ -35,15 +56,18 @@ namespace Menu
 
 				if(option == 1)
 				{
-
+					print_settings();
 				}
 				else if(option == 2)
 				{
-
+					//Build and run change read settings menu
+					AddressBookChangeReadSettingsMenu aAddressBookChangeReadSettingsMenu;
+					std::shared_ptr<Menu::Data::AddressBookChangeReadSettingsMenuResults> aRetrieveEntriesResults =
+						std::dynamic_pointer_cast<Menu::Data::AddressBookChangeReadSettingsMenuResults>(aAddressBookChangeReadSettingsMenu.run());
 				}
 				else if(option == 3)
 				{
-					//Build and run mandatory menu
+					//Build and run retrieve menu
 					Menu::AddressBookRetrieveEntriesMenu aRetrieveEntriesMenu;
 					std::shared_ptr<Menu::Data::AddressBookRetrieveEntriesMenuResults> aRetrieveEntriesResults =
 						std::dynamic_pointer_cast<Menu::Data::AddressBookRetrieveEntriesMenuResults>(aRetrieveEntriesMenu.run());

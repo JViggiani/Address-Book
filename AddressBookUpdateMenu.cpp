@@ -14,6 +14,8 @@ namespace Menu
 		auto aResults
 			= std::make_shared<Data::AddressBookUpdateMenuResults>();
 
+		std::cout << "NOT YET IMPLEMENTED" << "\n";
+
 		return aResults;
 	}
 }

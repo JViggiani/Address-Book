@@ -107,6 +107,16 @@ namespace Menu
 			}
 		};
 
+		struct AddressBookChangeReadSettingsMenuResults : public ConsoleMenuResults
+		{
+			std::string get_result_string()
+			{
+				std::string aResultString;
+
+				return aResultString;
+			}
+		};
+
 		
 		
 	}

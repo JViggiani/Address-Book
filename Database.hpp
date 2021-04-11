@@ -3,7 +3,7 @@
 #include <mutex>
 #include <iostream>
 #include <map>
-#include <queue>
+#include <stack>
 
 #include <regex>
 
@@ -11,6 +11,13 @@
 
 namespace Database
 {
+
+    enum class eSortMode
+    {
+        Unsorted,
+        FirstName,
+        LastName
+    }; // enum class
 
     //! The Database is a thread safe Singleton which handles the connection to the database
     class Database
@@ -43,6 +50,11 @@ namespace Database
 
         void search_entries(const std::regex& aRegex);
 
+        void delete_entry(unsigned int key);
+
+        eSortMode get_sort_mode();
+        void set_sort_mode(eSortMode aSortMode);
+
     protected:
         /// Constructors and Destructors ///
 
@@ -54,14 +66,31 @@ namespace Database
 
     private:
 
-        int determine_key_for_new_entry();
-        int determine_largest_key_currently_in_database();
+        unsigned int determine_key_for_new_entry();
+        unsigned int determine_largest_key_currently_in_database();
 
         static std::map<unsigned int, Data::DatabaseEntry> _database;
-        static std::queue<unsigned int> _database_available_keys;
+        static std::stack<unsigned int> _database_available_keys;
         
         static Database* _pinstance;
         static std::mutex _mutex;
+
+        static eSortMode _sortMode;
     };
 
+    struct CompareByFirstName
+    {
+        bool operator()(const Data::DatabaseEntry& a, const Data::DatabaseEntry& b) const
+        {
+            return a._mandatoryFields.first_name < b._mandatoryFields.first_name;
+        }
+    };
+
+    struct CompareByLastName
+    {
+        bool operator()(const Data::DatabaseEntry& a, const Data::DatabaseEntry& b) const
+        {
+            return a._mandatoryFields.last_name < b._mandatoryFields.last_name;
+        }
+    };
 }
