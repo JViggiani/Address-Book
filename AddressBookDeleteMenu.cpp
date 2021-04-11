@@ -1,6 +1,5 @@
 #include "ConsoleMenu.hpp"
 
-
 #include <boost/log/core.hpp>
 #include <boost/log/trivial.hpp>
 #include <boost/log/expressions.hpp>
@@ -9,11 +8,12 @@
 
 namespace Menu
 {
-    std::unique_ptr<Data::ConsoleMenuResults> Menu::AddressBookDeleteMenu::run()
-    {
-        std::unique_ptr<Data::AddressBookDeleteMenuResults> aResults
-            = std::make_unique<Data::AddressBookDeleteMenuResults>();
 
-        return aResults;
-    }
+	std::shared_ptr<Menu::Data::ConsoleMenuResults> Menu::AddressBookDeleteMenu::run()
+	{
+		auto aResults
+			= std::make_shared<Data::AddressBookDeleteMenuResults>();
+
+		return aResults;
+	}
 }

@@ -9,11 +9,10 @@
 
 namespace Menu
 {
-
-	std::unique_ptr<Data::ConsoleMenuResults> AddressBookCreateMenu::run()
+	std::shared_ptr<Data::ConsoleMenuResults> AddressBookCreateMenu::run()
 	{
 		auto aResults 
-			= std::make_unique<Data::AddressBookCreateMenuResults>();
+			= std::make_shared<Data::AddressBookCreateMenuResults>();
 		
 		try
 		{
@@ -38,16 +37,33 @@ namespace Menu
 
 				if(option == 1)
 				{
+					//Build and run mandatory menu
+					Menu::AddressBookMandatoryMenu aMandatoryMenu;
+					std::shared_ptr<Menu::Data::AddressBookMandatoryMenuResults> aMandatoryResults =
+						std::dynamic_pointer_cast<Menu::Data::AddressBookMandatoryMenuResults>(aMandatoryMenu.run());
+					
 					//Build and run optional menu
 					Menu::AddressBookOptionalMenu aOptionalMenu;
+					std::shared_ptr<Menu::Data::AddressBookOptionalMenuResults> aOptionalResults =
+						std::dynamic_pointer_cast<Menu::Data::AddressBookOptionalMenuResults>(aOptionalMenu.run());
 
-					std::unique_ptr<Menu::Data::AddressBookOptionalMenuResults> aOptionalResults(
-						std::move(dynamic_cast<Menu::Data::AddressBookOptionalMenuResults*>(aOptionalMenu.run().get())));
-					
+					Database::Data::DatabaseEntryMandatoryFields aDatabaseEntryMandatoryFields(*aMandatoryResults);
+					Database::Data::DatabaseEntryOptionalFields aDatabaseEntryOptionalFields(*aOptionalResults);
+
+					Database::Database::GetInstance()->create_entry(aDatabaseEntryMandatoryFields, aDatabaseEntryOptionalFields);
 				}
 				else if(option == 2)
 				{
+					//Build and run mandatory menu
 
+					//Causes null ptr
+					Menu::AddressBookMandatoryMenu aMandatoryMenu;
+					std::shared_ptr<Menu::Data::AddressBookMandatoryMenuResults> aMandatoryResults =
+						std::dynamic_pointer_cast<Menu::Data::AddressBookMandatoryMenuResults>(aMandatoryMenu.run());
+
+					Database::Data::DatabaseEntryMandatoryFields aDatabaseEntryMandatoryFields(*aMandatoryResults);
+
+					Database::Database::GetInstance()->create_entry(aDatabaseEntryMandatoryFields);
 				}
 				else if(option == 3)
 				{
@@ -69,9 +85,13 @@ namespace Menu
 
 			
 		}
+		catch(const std::exception& e)
+		{
+			BOOST_LOG_TRIVIAL(debug) << "Caught main menu std exception: " << e.what();
+		}
 		catch(...)
 		{
-
+			BOOST_LOG_TRIVIAL(debug) << "Caught unknown main menu exception.";
 		}
 
 		return aResults;

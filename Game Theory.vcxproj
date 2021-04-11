@@ -143,7 +143,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AddressBookCreateMenu.cpp" />
+    <ClCompile Include="AddressBookDeleteMenu.cpp" />
+    <ClCompile Include="AddressBookMandatoryMenu.cpp" />
     <ClCompile Include="AddressBookOptionalMenu.cpp" />
+    <ClCompile Include="AddressBookRetrieveEntriesMenu.cpp" />
+    <ClCompile Include="AddressBookUpdateMenu.cpp" />
+    <ClCompile Include="AddressBookReadMenu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="LoggingConfig.cpp" />
     <ClCompile Include="Database.cpp" />
@@ -154,9 +159,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AddressBookDeleteMenu.cpp" />
-    <ClInclude Include="AddressBookReadMenu.cpp" />
-    <ClInclude Include="AddressBookUpdateMenu.cpp" />
     <ClInclude Include="ConsoleMenu.hpp" />
     <ClInclude Include="DatabaseEntry.hpp" />
     <ClInclude Include="LoggingConfig.hpp" />

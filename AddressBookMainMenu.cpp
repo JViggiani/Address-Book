@@ -9,10 +9,10 @@
 
 namespace Menu
 {
-	std::unique_ptr<Data::ConsoleMenuResults> Menu::AddressBookMainMenu::run()
+	std::shared_ptr<Data::ConsoleMenuResults> Menu::AddressBookMainMenu::run()
 	{
-		std::unique_ptr<Data::AddressBookMainMenuResults> aResults 
-			= std::make_unique<Data::AddressBookMainMenuResults>();
+		std::shared_ptr<Data::AddressBookMainMenuResults> aResults 
+			= std::make_shared<Data::AddressBookMainMenuResults>();
 		
 		try
 		{
@@ -25,10 +25,10 @@ namespace Menu
 				std::cout << "========================" << "\n";
 				std::cout << "==    Address Book    ==" << "\n";
 				std::cout << "Enter Input" << "\n";
-				std::cout << "1. Create entry" << "\n";
-				std::cout << "2. Read entry" << "\n";
-				std::cout << "3. Update entry" << "\n";
-				std::cout << "4. Delete entry" << "\n";
+				std::cout << "1. Create entries" << "\n";
+				std::cout << "2. Read entries" << "\n";
+				std::cout << "3. Update entries" << "\n";
+				std::cout << "4. Delete entries" << "\n";
 				std::cout << "5. Exit" << "\n";
 				std::cout << "========================" << "\n";
 
@@ -39,40 +39,29 @@ namespace Menu
 				{
 					//Build and run create menu
 					Menu::AddressBookCreateMenu aAddressBookCreateMenu;
-
-					auto aAddressBookCreateMenuResults = aAddressBookCreateMenu.run();
-					/*
-					auto aAddressBookCreateMenuResults 
-						= std::make_unique<Data::AddressBookCreateMenuResults>(
-							std::move(aAddressBookCreateMenu.run()));
-					*/
+					std::shared_ptr<Menu::Data::AddressBookCreateMenuResults> aCreateResults =
+						std::dynamic_pointer_cast<Menu::Data::AddressBookCreateMenuResults>(aAddressBookCreateMenu.run());
 				}
 				else if(option == 2)
 				{
 					//Build and run read menu
-					/*
 					Menu::AddressBookReadMenu aAddressBookReadMenu;
-					std::unique_ptr<Data::AddressBookReadMenuResults> aAddressBookReadMenuResults
-						= std::make_unique<Data::AddressBookReadMenuResults>(std::move(aAddressBookReadMenu.run()));
-					*/
+					std::shared_ptr<Menu::Data::AddressBookReadMenuResults> aReadResults =
+						std::dynamic_pointer_cast<Menu::Data::AddressBookReadMenuResults>(aAddressBookReadMenu.run());
 				}
 				else if(option == 3)
-				{;
+				{
 					//Build and run update menu
-					/*
 					Menu::AddressBookUpdateMenu aAddressBookUpdateMenu;
-					std::unique_ptr<Data::AddressBookUpdateMenuResults> aAddressBookUpdateMenuResults
-						= std::make_unique<Data::AddressBookUpdateMenuResults>(std::move(aAddressBookUpdateMenu.run()));
-					*/
+					std::shared_ptr<Menu::Data::AddressBookUpdateMenuResults> aUpdateResults =
+						std::dynamic_pointer_cast<Menu::Data::AddressBookUpdateMenuResults>(aAddressBookUpdateMenu.run());
 				}
 				else if(option == 4)
 				{
 					//Build and run delete menu
-					/*
 					Menu::AddressBookDeleteMenu aAddressBookDeleteMenu;
-					std::unique_ptr<Data::AddressBookDeleteMenuResults> aAddressBookDeleteMenuResults
-						= std::make_unique<Data::AddressBookDeleteMenuResults>(std::move(aAddressBookDeleteMenu.run()));
-					*/
+					std::shared_ptr<Menu::Data::AddressBookDeleteMenuResults> aDeleteResults =
+						std::dynamic_pointer_cast<Menu::Data::AddressBookDeleteMenuResults>(aAddressBookDeleteMenu.run());
 				}
 				else if(option == 5)
 				{

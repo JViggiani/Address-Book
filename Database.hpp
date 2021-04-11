@@ -5,6 +5,8 @@
 #include <map>
 #include <queue>
 
+#include <regex>
+
 #include "DatabaseEntry.hpp"
 
 namespace Database
@@ -35,6 +37,12 @@ namespace Database
         //! This is the static method that controls the access to the singleton instance. It gaurantees that only one instance is ever made.
         static Database* GetInstance();
 
+        void create_entry(
+            const Data::DatabaseEntryMandatoryFields& aDatabaseEntryMandatoryFields,
+            const Data::DatabaseEntryOptionalFields& aDatabaseEntryOptionalFields = Data::DatabaseEntryOptionalFields());
+
+        void search_entries(const std::regex& aRegex);
+
     protected:
         /// Constructors and Destructors ///
 
@@ -46,14 +54,14 @@ namespace Database
 
     private:
 
-        static std::map<unsigned int, Data::DatabaseEntry> database_;
+        int determine_key_for_new_entry();
+        int determine_largest_key_currently_in_database();
 
-        static std::queue<unsigned int> database_available_keys_;
-
-        static unsigned int largest_key_;
-
-        static Database* pinstance_;
-        static std::mutex mutex_;
+        static std::map<unsigned int, Data::DatabaseEntry> _database;
+        static std::queue<unsigned int> _database_available_keys;
+        
+        static Database* _pinstance;
+        static std::mutex _mutex;
     };
 
 }

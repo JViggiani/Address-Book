@@ -12,6 +12,21 @@ namespace Database
 			{
 			};
 
+			DatabaseEntryMandatoryFields(const Menu::Data::AddressBookMandatoryMenuResults& aAddressBookMandatoryMenuResults)
+				: first_name(aAddressBookMandatoryMenuResults.first_name),
+				last_name(aAddressBookMandatoryMenuResults.last_name)
+			{
+			};
+
+			std::string get_string()
+			{
+				std::string aReturn;
+				aReturn.append("First name: " + first_name + "\n");
+				aReturn.append("Last name: " + last_name + "\n");
+
+				return aReturn;
+			};
+
 			std::string first_name;
 			std::string last_name;
 		};
@@ -23,15 +38,29 @@ namespace Database
 			void operator=(const Menu::Data::AddressBookOptionalMenuResults& aAddressBookOptionalMenuResults)
 			{
 				phone_number = aAddressBookOptionalMenuResults.phone_number;
+				email = aAddressBookOptionalMenuResults.email;
 			};
 			
 			
 			DatabaseEntryOptionalFields(const Menu::Data::AddressBookOptionalMenuResults& aAddressBookOptionalMenuResults) 
-				: phone_number(aAddressBookOptionalMenuResults.phone_number)
+				: phone_number(aAddressBookOptionalMenuResults.phone_number),
+				email(aAddressBookOptionalMenuResults.email)
 			{
 			};
 
+			std::string get_string()
+			{
+				std::string aReturn;
+				if(!phone_number.empty())
+					aReturn.append("Phone number: " + phone_number + "\n");
+				if(!email.empty())
+					aReturn.append("Email: " + email + "\n");
+
+				return aReturn;
+			};
+
 			std::string phone_number;
+			std::string email;
 		};
 		
 		// This describes the data which should be stored in the database.
@@ -43,6 +72,16 @@ namespace Database
 				:	_mandatoryFields(aDatabaseEntryMandatoryFields),
 					_optionalFields(aDatabaseEntryOptionalFields)
 			{
+			};
+
+			std::string get_string()
+			{
+				std::string aReturn;
+
+				aReturn.append(_mandatoryFields.get_string());
+				aReturn.append(_optionalFields.get_string());
+
+				return aReturn;
 			};
 			
 			DatabaseEntryMandatoryFields _mandatoryFields;

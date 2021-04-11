@@ -70,13 +70,44 @@ namespace Menu
 				std::string aResultString;
 
 				aResultString.append(phone_number);
+				aResultString.append("\n");
+				aResultString.append(email);
 
 				return aResultString;
 			}
 
 			std::string phone_number;
+			std::string email;
 		};
 
+		struct AddressBookMandatoryMenuResults : public ConsoleMenuResults
+		{
+			std::string get_result_string()
+			{
+				std::string aResultString;
+
+				aResultString.append(first_name);
+				aResultString.append("\n");
+				aResultString.append(last_name);
+
+				return aResultString;
+			}
+
+			std::string first_name;
+			std::string last_name;
+		};
+
+		struct AddressBookRetrieveEntriesMenuResults : public ConsoleMenuResults
+		{
+			std::string get_result_string()
+			{
+				std::string aResultString;
+
+				return aResultString;
+			}
+		};
+
+		
 		
 	}
 }

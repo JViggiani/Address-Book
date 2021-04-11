@@ -5,6 +5,8 @@
 #include <memory>
 #include <iostream>
 
+#include <vector>
+
 namespace Menu
 {
 
@@ -16,7 +18,7 @@ namespace Menu
 
 		// This contains the menu program loop
 		// TODO1: Consider return type, is any data needed to be returned, such as a polymorphic Results object?
-		virtual std::unique_ptr<Data::ConsoleMenuResults> run() = 0;
+		virtual std::shared_ptr<Data::ConsoleMenuResults> run() = 0;
 	};
 
 	class AddressBookMainMenu : public Menu::ConsoleMenu
@@ -48,7 +50,7 @@ namespace Menu
 		///	Functions ///
 
 		// This contains the main program loop and controls the upper menu level
-		std::unique_ptr<Data::ConsoleMenuResults> run() final;
+		std::shared_ptr<Data::ConsoleMenuResults> run() final;
 
 	};
 
@@ -81,7 +83,7 @@ namespace Menu
 		///	Functions ///
 
 		// This contains the main program loop and controls the upper menu level
-		std::unique_ptr<Data::ConsoleMenuResults> run() final;
+		std::shared_ptr<Data::ConsoleMenuResults> run() final;
 	};
 
 	class AddressBookReadMenu : public Menu::ConsoleMenu
@@ -113,7 +115,7 @@ namespace Menu
 		///	Functions ///
 
 		// This contains the main program loop and controls the upper menu level
-		std::unique_ptr<Data::ConsoleMenuResults> run() final;
+		std::shared_ptr<Data::ConsoleMenuResults> run() final;
 	};
 
 	class AddressBookUpdateMenu : public Menu::ConsoleMenu
@@ -145,7 +147,7 @@ namespace Menu
 		///	Functions ///
 
 		// This contains the main program loop and controls the upper menu level
-		std::unique_ptr<Data::ConsoleMenuResults> run() final;
+		std::shared_ptr<Data::ConsoleMenuResults> run() final;
 	};
 
 	class AddressBookDeleteMenu : public Menu::ConsoleMenu
@@ -177,9 +179,8 @@ namespace Menu
 		///	Functions ///
 
 		// This contains the main program loop and controls the upper menu level
-		std::unique_ptr<Data::ConsoleMenuResults> run() final;
+		std::shared_ptr<Data::ConsoleMenuResults> run() final;
 	};	
-
 
 	class AddressBookOptionalMenu : public Menu::ConsoleMenu
 	{
@@ -210,7 +211,78 @@ namespace Menu
 		///	Functions ///
 
 		// This contains the main program loop and controls the upper menu level
-		std::unique_ptr<Data::ConsoleMenuResults> run() final;
+		std::shared_ptr<Data::ConsoleMenuResults> run() final;
+
+	private:
+		std::vector<int> get_options_passed(const std::string& aOption);
 
 	};
+
+	class AddressBookMandatoryMenu : public Menu::ConsoleMenu
+	{
+	public:
+
+		///	Constructors and Destructors ///
+
+		//! Main constructor.
+		AddressBookMandatoryMenu() = default;
+
+		//! Default destructor.
+		~AddressBookMandatoryMenu() = default;
+
+		//! Default copy constructor
+		AddressBookMandatoryMenu(const AddressBookMandatoryMenu&) = default;
+
+		//! Default move constructor
+		AddressBookMandatoryMenu(AddressBookMandatoryMenu&&) = default;
+
+		///	Operators ///
+
+		//! Default copy assignment
+		AddressBookMandatoryMenu& operator=(const AddressBookMandatoryMenu&) = default;
+
+		//! Default move assignment
+		AddressBookMandatoryMenu& operator=(AddressBookMandatoryMenu&&) = default;
+
+		///	Functions ///
+
+		// This contains the main program loop and controls the upper menu level
+		std::shared_ptr<Data::ConsoleMenuResults> run() final;
+
+	};
+
+	class AddressBookRetrieveEntriesMenu : public Menu::ConsoleMenu
+	{
+	public:
+
+		///	Constructors and Destructors ///
+
+		//! Main constructor.
+		AddressBookRetrieveEntriesMenu() = default;
+
+		//! Default destructor.
+		~AddressBookRetrieveEntriesMenu() = default;
+
+		//! Default copy constructor
+		AddressBookRetrieveEntriesMenu(const AddressBookRetrieveEntriesMenu&) = default;
+
+		//! Default move constructor
+		AddressBookRetrieveEntriesMenu(AddressBookRetrieveEntriesMenu&&) = default;
+
+		///	Operators ///
+
+		//! Default copy assignment
+		AddressBookRetrieveEntriesMenu& operator=(const AddressBookRetrieveEntriesMenu&) = default;
+
+		//! Default move assignment
+		AddressBookRetrieveEntriesMenu& operator=(AddressBookRetrieveEntriesMenu&&) = default;
+
+		///	Functions ///
+
+		// This contains the main program loop and controls the upper menu level
+		std::shared_ptr<Data::ConsoleMenuResults> run() final;
+
+	};
+
+	
 }

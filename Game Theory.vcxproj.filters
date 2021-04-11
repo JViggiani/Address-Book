@@ -57,6 +57,21 @@
     <ClCompile Include="AddressBookOptionalMenu.cpp">
       <Filter>Source Files\Menu</Filter>
     </ClCompile>
+    <ClCompile Include="AddressBookMandatoryMenu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressBookRetrieveEntriesMenu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressBookUpdateMenu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressBookReadMenu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressBookDeleteMenu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -82,15 +97,6 @@
     </ClInclude>
     <ClInclude Include="AddressBookConfig.hpp">
       <Filter>Header Files\Config</Filter>
-    </ClInclude>
-    <ClInclude Include="AddressBookDeleteMenu.cpp">
-      <Filter>Source Files\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="AddressBookUpdateMenu.cpp">
-      <Filter>Source Files\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="AddressBookReadMenu.cpp">
-      <Filter>Source Files\Menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
