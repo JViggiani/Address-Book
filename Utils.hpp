@@ -23,10 +23,12 @@ namespace Utils
     }
 
     //JOSH todo make me templated?
-    void printMenuResults(std::shared_ptr<Menu::Data::AddressBookResults>)
+    /*
+    void printMenuResults(std::shared_ptr<Menu::Data::AddressBookMainMenuResults>)
     {
-        BOOST_LOG_TRIVIAL(info) << "Tournament results:";
+        BOOST_LOG_TRIVIAL(info) << "Address book results:";
 
         //JOSH TODO
     }
+    */
 }

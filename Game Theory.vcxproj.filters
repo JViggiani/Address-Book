@@ -19,11 +19,23 @@
     <Filter Include="Source Files\Menu">
       <UniqueIdentifier>{c16128a1-965a-4189-9b1a-d12e77bd3fab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Menu\Data">
+      <UniqueIdentifier>{3202cdb8-4329-4b53-be29-578502dd8b10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Database">
+      <UniqueIdentifier>{974a963a-15c0-48b6-80a0-46fe15fb8948}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Database\Data">
+      <UniqueIdentifier>{c3aea174-7d1a-40b4-bb42-a243977c0c62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Database">
+      <UniqueIdentifier>{a8dc39fb-33ec-4431-b9e2-4d3274261bac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Config">
+      <UniqueIdentifier>{a184d405-9de5-4f6a-b1c5-482ee2261e48}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Database.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -33,10 +45,16 @@
     <ClCompile Include="LoggingConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConsoleMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AddressBookMainMenu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressBookCreateMenu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Database.cpp">
+      <Filter>Source Files\Database</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressBookOptionalMenu.cpp">
       <Filter>Source Files\Menu</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,26 +62,35 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Database.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AddressBookConfig.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LoggingConfig.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Utils.hpp">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleMenuResults.hpp">
-      <Filter>Header Files\Menu</Filter>
     </ClInclude>
     <ClInclude Include="ConsoleMenu.hpp">
       <Filter>Header Files\Menu</Filter>
     </ClInclude>
-    <ClInclude Include="AddressBookMainMenu.hpp">
-      <Filter>Header Files\Menu</Filter>
+    <ClInclude Include="ConsoleMenuResults.hpp">
+      <Filter>Header Files\Menu\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Database.hpp">
+      <Filter>Header Files\Database</Filter>
+    </ClInclude>
+    <ClInclude Include="DatabaseEntry.hpp">
+      <Filter>Header Files\Database\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="LoggingConfig.hpp">
+      <Filter>Header Files\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="AddressBookConfig.hpp">
+      <Filter>Header Files\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="AddressBookDeleteMenu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="AddressBookUpdateMenu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="AddressBookReadMenu.cpp">
+      <Filter>Source Files\Menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

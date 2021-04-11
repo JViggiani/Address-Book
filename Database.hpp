@@ -2,8 +2,12 @@
 
 #include <mutex>
 #include <iostream>
+#include <map>
+#include <queue>
 
-namespace Core
+#include "DatabaseEntry.hpp"
+
+namespace Database
 {
 
     //! The Database is a thread safe Singleton which handles the connection to the database
@@ -31,9 +35,6 @@ namespace Core
         //! This is the static method that controls the access to the singleton instance. It gaurantees that only one instance is ever made.
         static Database* GetInstance();
 
-        //JOSH TODO add members here to initialise database, update members etc etc
-        
-
     protected:
         /// Constructors and Destructors ///
 
@@ -44,6 +45,12 @@ namespace Core
         ~Database();
 
     private:
+
+        static std::map<unsigned int, Data::DatabaseEntry> database_;
+
+        static std::queue<unsigned int> database_available_keys_;
+
+        static unsigned int largest_key_;
 
         static Database* pinstance_;
         static std::mutex mutex_;

@@ -11,12 +11,9 @@ namespace Menu
 		{
 		public:
 			virtual std::string get_result_string() = 0;
-		private:
-			//Not constructable, only a parent for other results
-			ConsoleMenuResults();
 		};
 
-		struct AddressBookResults : public ConsoleMenuResults
+		struct AddressBookMainMenuResults : public ConsoleMenuResults
 		{
 			std::string get_result_string()
 			{
@@ -25,6 +22,62 @@ namespace Menu
 				return aResultString;
 			}
 		};
+
+		struct AddressBookCreateMenuResults : public ConsoleMenuResults
+		{
+			std::string get_result_string()
+			{
+				std::string aResultString;
+
+				return aResultString;
+			}
+		};
+
+		struct AddressBookReadMenuResults : public ConsoleMenuResults
+		{
+			std::string get_result_string()
+			{
+				std::string aResultString;
+
+				return aResultString;
+			}
+		};
+
+		struct AddressBookUpdateMenuResults : public ConsoleMenuResults
+		{
+			std::string get_result_string()
+			{
+				std::string aResultString;
+
+				return aResultString;
+			}
+		};
+
+		struct AddressBookDeleteMenuResults : public ConsoleMenuResults
+		{
+			std::string get_result_string()
+			{
+				std::string aResultString;
+
+				return aResultString;
+			}
+		};
+
+		struct AddressBookOptionalMenuResults : public ConsoleMenuResults
+		{
+			std::string get_result_string()
+			{
+				std::string aResultString;
+
+				aResultString.append(phone_number);
+
+				return aResultString;
+			}
+
+			std::string phone_number;
+		};
+
+		
 	}
 }
 

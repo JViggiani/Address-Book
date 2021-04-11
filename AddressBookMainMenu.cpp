@@ -1,4 +1,5 @@
-#include "AddressBookMainMenu.hpp"
+#include "ConsoleMenu.hpp"
+
 
 #include <boost/log/core.hpp>
 #include <boost/log/trivial.hpp>
@@ -8,66 +9,99 @@
 
 namespace Menu
 {
-	AddressBookMainMenu::AddressBookMainMenu(const Config::AddressBookConfig& aAddressBookConfig)
+	std::unique_ptr<Data::ConsoleMenuResults> Menu::AddressBookMainMenu::run()
 	{
-        BOOST_LOG_TRIVIAL(debug) << "Constructing AddressBook";
-	}
-	
-    void Menu::AddressBookMainMenu::run()
-	{
-		bool end = false;
-
-		do
+		std::unique_ptr<Data::AddressBookMainMenuResults> aResults 
+			= std::make_unique<Data::AddressBookMainMenuResults>();
+		
+		try
 		{
-			std::cout << "========================" << "\n";
-			std::cout << "==    Address Book    ==" << "\n";
-			std::cout << "Enter Input" << "\n";
-			std::cout << "1. Search address book" << "\n";
-			std::cout << "2. Add contacts" << "\n";
-			std::cout << "3. Remove contacts" << "\n";
-			std::cout << "4. View contacts" << "\n";
-			std::cout << "5. Edit contacts" << "\n";
-			std::cout << "6. Exit" << "\n";
-			std::cout << "========================" << "\n";
+			BOOST_LOG_TRIVIAL(debug) << "Opening main menu.";
+			
+			bool end = false;
 
-			int option;
-			std::cin >> option;
+			do
+			{
+				std::cout << "========================" << "\n";
+				std::cout << "==    Address Book    ==" << "\n";
+				std::cout << "Enter Input" << "\n";
+				std::cout << "1. Create entry" << "\n";
+				std::cout << "2. Read entry" << "\n";
+				std::cout << "3. Update entry" << "\n";
+				std::cout << "4. Delete entry" << "\n";
+				std::cout << "5. Exit" << "\n";
+				std::cout << "========================" << "\n";
 
-			if(option == 1)
-			{
+				int option;
+				std::cin >> option;
 
-			}
-			else if(option == 2)
-			{
-
-			}
-			else if(option == 3)
-			{
-				
-			}
-			else if(option == 4)
-			{
-
-			}
-			else if(option == 5)
-			{
-
-			}
-			else if(option == 6)
-			{
-				end = true;
-			}
-			else
-			{
-				std::cout << "Invalid input" << "\n";
-				if(std::cin.fail())
+				if(option == 1)
 				{
-					std::cin.clear();
-					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					//Build and run create menu
+					Menu::AddressBookCreateMenu aAddressBookCreateMenu;
+
+					auto aAddressBookCreateMenuResults = aAddressBookCreateMenu.run();
+					/*
+					auto aAddressBookCreateMenuResults 
+						= std::make_unique<Data::AddressBookCreateMenuResults>(
+							std::move(aAddressBookCreateMenu.run()));
+					*/
 				}
-			}
+				else if(option == 2)
+				{
+					//Build and run read menu
+					/*
+					Menu::AddressBookReadMenu aAddressBookReadMenu;
+					std::unique_ptr<Data::AddressBookReadMenuResults> aAddressBookReadMenuResults
+						= std::make_unique<Data::AddressBookReadMenuResults>(std::move(aAddressBookReadMenu.run()));
+					*/
+				}
+				else if(option == 3)
+				{;
+					//Build and run update menu
+					/*
+					Menu::AddressBookUpdateMenu aAddressBookUpdateMenu;
+					std::unique_ptr<Data::AddressBookUpdateMenuResults> aAddressBookUpdateMenuResults
+						= std::make_unique<Data::AddressBookUpdateMenuResults>(std::move(aAddressBookUpdateMenu.run()));
+					*/
+				}
+				else if(option == 4)
+				{
+					//Build and run delete menu
+					/*
+					Menu::AddressBookDeleteMenu aAddressBookDeleteMenu;
+					std::unique_ptr<Data::AddressBookDeleteMenuResults> aAddressBookDeleteMenuResults
+						= std::make_unique<Data::AddressBookDeleteMenuResults>(std::move(aAddressBookDeleteMenu.run()));
+					*/
+				}
+				else if(option == 5)
+				{
+					end = true;
+				}
+				else
+				{
+					std::cout << "Invalid input" << "\n";
+					if(std::cin.fail())
+					{
+						std::cin.clear();
+						std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					}
+				}
 
-		} while(end == false);
+			} while(end == false);
+			BOOST_LOG_TRIVIAL(debug) << "Closing main menu.";
+
+			
+		}
+		catch(const std::exception& e)
+		{
+			BOOST_LOG_TRIVIAL(debug) << "Caught main menu std exception: " << e.what();
+		}
+		catch(...)
+		{
+			BOOST_LOG_TRIVIAL(debug) << "Caught unknown main menu exception.";
+		}
+
+		return aResults;
 	}
-
 }

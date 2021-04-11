@@ -5,7 +5,7 @@
 
 #include <boost/log/trivial.hpp>
 
-namespace Core
+namespace Database
 {
 
     Database* Database::pinstance_{nullptr};

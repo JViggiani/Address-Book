@@ -16,7 +16,7 @@
 #include "AddressBookConfig.hpp"
 #include "ConsoleMenuResults.hpp"
 #include "LoggingConfig.hpp"
-#include "AddressBookMainMenu.hpp"
+#include "ConsoleMenu.hpp"
 #include "Utils.hpp"
 #include "Database.hpp"
 
@@ -28,12 +28,11 @@ int main(int argc, char* argv[])
         Config::LoggingConfig aLoggingConfig;
         Utils::init_logging(aLoggingConfig);
         
-        
         BOOST_LOG_TRIVIAL(debug) << "Beginning main.";
 
         //Build and run address book
-        Config::AddressBookConfig aAddressBookConfig;
-        Menu::AddressBookMainMenu aAddressBook(aAddressBookConfig);
+        //Config::AddressBookConfig aAddressBookConfig;
+        Menu::AddressBookMainMenu aAddressBook;
         aAddressBook.run();
 
         //Utils::printMenuResults(aAddressBookResults);
