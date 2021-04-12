@@ -3,18 +3,31 @@
 This is the implementation of the technical assessment required by Foundry.
 
 Minimum requirements:
+
 ● Provide your solution as a public GitHub repository link 
+
 ● Support from zero to a “large number” of entries. 
+
 ● Entries should contain: 
+
   ○ A first and last name. 
+
   ○ An optional phone number. 
+
 ● Provide functionality to: 
+
   ○ Add an entry. 
+
   ○ Remove an entry. 
+
   ○ Retrieve entries in alphabetical order, sorted by first name. 
+
   ○ Retrieve entries in alphabetical order, sorted by last name. 
+
   ○ Retrieve entries whose first or last name exactly or partially match a supplied search string, from the beginning of the name (e.g. searching for “Dan” would match any entries with “Daniel” as well as any “Dan”). 
+
   ○ Make this matching case insensitive. 
+
 ● Provide instructions on how to build and run your application. 
 
 To change the ordering of fetching entries, enter the Read menu and select 1 to view order settings and 2 to change it. 
