@@ -34,11 +34,11 @@ Use NuGet, and search for and install: "boost-vc142 v1.72" inside NuGet.
 
 ## Future Requirements
 
-It would be good to adhere to standard CRUD database actions. An update menu section was added but was not implemented. Ideally the user could define the key to update the entry of, and the database item could be edited without having to perform a delete and then an add. 
-
-Originally it was sought that this program would have a GUI, however the QT account registration service seemed to be down, so the editor could not be used. A console application was completed instead. 
-
-The entire database is loaded into memory at the same time, which is not memory efficient. Instead, the Database singleton should be used to maintain a connection to an SQL database, and the rest of the program should act as an interface to it. 
+- It would be good to adhere to standard CRUD database actions. An update menu section was added but was not implemented. Ideally the user could define the key to update the entry of, and the database item could be edited without having to perform a delete and then an add. 
+- Originally it was sought that this program would have a GUI, however the QT account registration service seemed to be down, so the editor could not be used. A console application was completed instead. 
+- The entire database is loaded into memory at the same time, which is not memory efficient. Instead, the Database class should be used to maintain a connection to an SQL database, and the rest of the program should act as an interface to it. 
+- The database singleton design should be revamped, as it's hard to mock a database connection. SQL databases often support multiple connections, so a better way to implement this would be to have a singleton maintain a pool of database connections represented by a queue. The pool itself would have no business logic, so would never need to be mocked. It would simply contain connection instances, which could be mocked. 
+- There should be a cleaner separation between classes which perform UI duties, classes whose duty is to update the database, and classes which contain business logic. 
 
 Unit tests should be created, although it is difficult to unit test a singleton. 
 
